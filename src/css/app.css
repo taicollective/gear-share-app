@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --theme-1: #0c0c0c;
+    --theme-2: #222222;
+    --theme-3: #484545;
+    --theme-4: #777777;
+    --theme-5: #8d8d8d;
+    --theme-6: #a5a5a5;
+    --theme-7: #c5c5c5;
+    --theme-8: #e4e4e4;
+    --theme-9: #f2f2f2;
+    --theme-10: #f8f8f8;
+
+    --red: #ff0000;
+    --orange: #ff4400;
+    --yellow: #ffc700;
+    --green: #42ff00;
+    --cyan: #00e0ff;
+    --blue: #0029ff;
+    --purple: #8f00ff;
+    --black: #000000;
+    --white: #ffffff;
+
+    --radius: 15px;
+    --padding: 15px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+h1 { font-size: 60px;}
+h2 { font-size: 54px;}
+h3 { font-size: 48px;}
+h4 { font-size: 42px;}
+h5 { font-size: 36px;}
+h6 { font-size: 30px;}
+p { font-size: 22.5px;}
+
+input {
+    outline: none;
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--radius);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+button {
+    background-color: var(--black);
+    color: var(--white);
+    outline: none;
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--radius);
+    font-weight: 700;
+}
+
+.inter-thin { font-weight: 100; }
+.inter-extra-light { font-weight: 200; }
+.inter-light { font-weight: 300; }
+.inter-regular { font-weight: 400; }
+.inter-medium { font-weight: 500; }
+.inter-semi-bold { font-weight: 600; }
+.inter-bold { font-weight: 700; }
+.inter-extra-bold { font-weight: 800; }
+.inter-black { font-weight: 900; }
+
+.italicised { font-style: italic; }
+.underlined { text-decoration: underline; }
+
+.logo-xs { width: 50px; aspect-ratio: 1 / 0.778; }
+.logo-s { width: 100px; aspect-ratio: 1 / 0.778; }
+.logo-sm { width: 150px; aspect-ratio: 1 / 0.778; }
+.logo-m { width: 200px; aspect-ratio: 1 / 0.778; }
+.logo-ml { width: 250px; aspect-ratio: 1 / 0.778; }
+.logo-l { width: 300px; aspect-ratio: 1 / 0.778; }
+.logo-xl { width: 400px; aspect-ratio: 1 / 0.778; }
+
+.input-s { width: 100px; aspect-ratio: 1 / 0.175;  font-size: 17.5px;}
+.input-sm { width: 150px; aspect-ratio: 1 / 0.15;  font-size: 20px;}
+.input-m { width: 200px; aspect-ratio: 1 / 0.125; font-size: 22.5px;}
+.input-ml { width: 250px; aspect-ratio: 1 / 0.1; font-size: 25px;}
+.input-l { width: 300px; aspect-ratio: 1 / 0.075;  font-size: 27.5px;}
+
+.btn-s {width: 100px; aspect-ratio: 1 / 0.2; font-size: 20px;}
+.btn-sm {width: 150px; aspect-ratio: 1 / 0.2125; font-size: 22.5px;}
+.btn-m {width: 200px; aspect-ratio: 1 / 0.225; font-size: 25px;}
+.btn-ml {width: 250px; aspect-ratio: 1 / 0.2375; font-size: 27.5px;}
+.btn-l {width: 300px; aspect-ratio: 1 / 0.25; font-size: 30px;}

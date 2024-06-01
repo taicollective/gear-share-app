@@ -9,11 +9,11 @@
         <div id="content--buttons" class="content">
             <div id="log-in--container" class="buttons">
                 <p class="subtext">Already have an account?</p>
-                <button class="register-buttons inter-bold"><h5 class="inter-bold" @click="goToLogin">Log In</h5></button>
+                <button class="register-buttons inter-bold" @click="goToLogin"><h5 class="inter-bold">Log In</h5></button>
             </div>
             <div id="sign-up--container" class="buttons">
                 <p class="subtext">Don't have an account?</p>
-                <button class="register-buttons inter-bold"><h5 class="inter-bold">Sign Up</h5></button>
+                <button class="register-buttons inter-bold" @click="goToSignup"><h5 class="inter-bold">Sign Up</h5></button>
             </div>
         </div>
     </div>
@@ -28,6 +28,10 @@ const emit = defineEmits(['showLogIn', 'showSignUp'])
 
 const goToLogin = () => {
   emit('showLogIn')
+}
+
+const goToSignup = () => {
+  emit('showSignUp')
 }
 
 </script>
@@ -46,7 +50,6 @@ const goToLogin = () => {
     align-items: center;
     grid-template-rows: 3.5fr 3fr 7fr;
     position: relative;
-    background-color: var(--orange);
 }
 
 .content {

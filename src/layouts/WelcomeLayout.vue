@@ -1,8 +1,13 @@
 <template>
     <div id="layout-view">
-        <WelcomePage v-if="welcome" @showLogIn="showLoginPage" @showSignUp="showSignUpPage"/>
-        <LoginPage v-if="login" @showSignUp="showSignUpPage"/>
-        <SignUpPage v-if="signup" @showLogIn="showLoginPage"/>
+        <div id="basketball-court"></div>
+        <div id="orange-gradient"></div>
+        <div id="black-overlay"></div>
+        <div id="view--content">
+          <WelcomePage v-if="welcome" @showLogIn="showLoginPage" @showSignUp="showSignUpPage"/>
+          <LoginPage v-if="login" @showSignUp="showSignUpPage"/>
+          <SignUpPage v-if="signup" @showLogIn="showLoginPage"/>
+        </div>
     </div>
 </template>
 
@@ -38,8 +43,35 @@ const showSignUpPage = () => {
 <style scoped>
 
 #layout-view {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+#view--content {
+  z-index: 1;
+}
+
+#basketball-court, #black-overlay, #orange-gradient {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+#basketball-court {
+  background-image: url("../assets/red-basketball-court.png");
+  background-position: center;
+  background-size: cover;
+  z-index:
+}
+
+#orange-gradient {
+  background: linear-gradient(0deg, rgba(255,92,0,0) 0%, rgba(255,92,0,1) 100%);
+}
+
+#black-overlay {
+  background-color: rgba(0, 0, 0, 0.2)
 }
 
 </style>

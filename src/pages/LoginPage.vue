@@ -49,7 +49,6 @@ const switchToSignUp = () => {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-columns: 1fr;
-  background-color: var(--orange);
 }
 
 .content {
@@ -90,6 +89,10 @@ const switchToSignUp = () => {
   align-items: flex-end;
   justify-content: flex-start;
   color: var(--white);
+}
+
+.subtitle {
+  font-size: 25px;
 }
 
 .form--input-wrapper {

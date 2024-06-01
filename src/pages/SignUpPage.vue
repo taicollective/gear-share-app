@@ -4,14 +4,38 @@
         <img src="../assets/gear-share-logo.png" class="logo-sm">
       </div>
       <div id="content--form" class="content">
-        <h6 class="inter-regular">Email</h6>
-        <input type="text" class="input-l">
-        <h6 class="inter-regular">Password</h6>
-        <input type="text" class="input-l">
-        <h6 class="inter-regular">Password</h6>
-        <input type="text" class="input-l">
-        <h6 class="inter-regular">Password</h6>
-        <input type="text" class="input-l">
+        <div class="form--row-group">
+          <div class="form--row form--subtitle-wrapper">
+            <h6 class="inter-regular subtitle">Full Name</h6>
+          </div>
+          <div class="form--row form--input-wrapper">
+            <input type="text" class="input-l input">
+          </div>
+        </div>
+        <div class="form--row-group">
+          <div class="form--row form--subtitle-wrapper">
+            <h6 class="inter-regular subtitle">Username</h6>
+          </div>
+          <div class="form--row form--input-wrapper">
+            <input type="text" class="input-l input">
+          </div>
+        </div>
+        <div class="form--row-group">
+          <div class="form--row form--subtitle-wrapper">
+            <h6 class="inter-regular subtitle">Password</h6>
+          </div>
+          <div class="form--row form--input-wrapper">
+            <input type="text" class="input-l input">
+          </div>
+        </div>
+        <div class="form--row-group">
+          <div class="form--row form--subtitle-wrapper">
+            <h6 class="inter-regular subtitle">Email</h6>
+          </div>
+          <div class="form--row form--input-wrapper">
+            <input type="text" class="input-l input">
+          </div>
+        </div>
       </div>
       <div id="content--button" class="content">
         <button class="btn-l">Sign Up</button>
@@ -41,7 +65,6 @@ const switchToLogIn = () => {
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-columns: 1fr;
-  background-color: var(--orange);
 }
 
 .content {
@@ -55,15 +78,45 @@ const switchToLogIn = () => {
 }
 
 #content--form {
+  display: grid;
+  grid-template-rows: repeat(1fr, 4);
+  grid-template-columns: 1fr;
+  grid-gap: 5px;
+  justify-items: center;
+  align-items: end;
   text-align: left;
 }
 
-#content--logo, #content--button {
-  background-color: purple;
+.form--row-group {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 0.5fr 1fr;
+}
+
+.form--row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.form--subtitle-wrapper {
+  align-items: flex-end;
+  justify-content: flex-start;
+  color: var(--white);
+}
+
+.subtitle {
+  font-size: 25px;
+}
+
+.form--input-wrapper {
+  align-items: flex-start;
 }
 
 .underlined {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 </style>

@@ -91,3 +91,8 @@ button {
 .btn-m {width: 200px; aspect-ratio: 1 / 0.225; font-size: 25px;}
 .btn-ml {width: 250px; aspect-ratio: 1 / 0.2375; font-size: 27.5px;}
 .btn-l {width: 300px; aspect-ratio: 1 / 0.25; font-size: 30px;}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}

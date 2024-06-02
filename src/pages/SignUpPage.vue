@@ -116,7 +116,9 @@ const switchToLogIn = () => {
 }
 
 .underlined {
-  margin-top: 10px;
+  margin-top: 5px;
+  color: var(--white);
+  font-size: 17.5px;
 }
 
 </style>

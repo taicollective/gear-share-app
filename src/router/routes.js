@@ -1,9 +1,14 @@
 import WelcomeLayout from 'layouts/WelcomeLayout.vue'
+import HomeLayout from 'layouts/HomeLayout.vue'
 
 const routes = [
   {
     path: '/',
     component: WelcomeLayout
+  },
+  {
+    path: '/home',
+    component: HomeLayout
   }
 
   // Always leave this as last one,

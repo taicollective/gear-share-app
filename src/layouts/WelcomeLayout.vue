@@ -63,11 +63,11 @@ const showSignUpPage = () => {
   background-image: url("../assets/red-basketball-court.png");
   background-position: center;
   background-size: cover;
-  z-index:
+  z-index: -1;
 }
 
 #orange-gradient {
-  background: linear-gradient(0deg, rgba(255,92,0,0) 0%, rgba(255,92,0,1) 100%);
+  background: linear-gradient(0deg, rgba(255,92,0,0) 0%, rgba(255,92,0,0.6) 100%);
 }
 
 #black-overlay {

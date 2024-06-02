@@ -1,30 +1,39 @@
 <template>
     <div class="container">
         <div id="content--logo" class="content">
-            <img src="../assets/gear-share-logo.png" id="logo">
+            <img src="../assets/gear-share-logo.png" class="logo-sm">
         </div>
-        <div id="content--subtitle" class="content">
-            <p id="subtitle" class="inter-bold">Score BIG, give BIGGER, support our athletes today!</p>
+        <div id="content--title" class="content">
+            <h6 class="inter-bold">Score BIG, give BIGGER</h6>
+            <h6 class="inter-bold">support our athletes</h6>
+            <h6 class="inter-bold">today!</h6>
         </div>
         <div id="content--buttons" class="content">
-            <div id="log-in--container" class="buttons">
+            <div class="buttons--row-group">
                 <p class="subtext">Already have an account?</p>
-                <button class="register-buttons inter-bold" @click="goToLogin"><h5 class="inter-bold">Log In</h5></button>
+                <button class="btn-l" @click="goToLogin">LOG IN</button>
             </div>
-            <div id="sign-up--container" class="buttons">
+            <div class="buttons--row-group">
                 <p class="subtext">Don't have an account?</p>
-                <button class="register-buttons inter-bold" @click="goToSignup"><h5 class="inter-bold">Sign Up</h5></button>
+                <button class="btn-l" @click="goToSignup">SIGN UP</button>
+            </div>
+            <div class="buttons--row-group">
+                <button class="btn-l" @click="showApp">
+                    <RouterLink to="/home" class="link">CONTINUE</RouterLink>
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
+
 defineOptions({
   name: 'WelcomePage'
 })
 
-const emit = defineEmits(['showLogIn', 'showSignUp'])
+const emit = defineEmits(['showLogIn', 'showSignUp', 'showApp'])
 
 const goToLogin = () => {
   emit('showLogIn')
@@ -32,6 +41,10 @@ const goToLogin = () => {
 
 const goToSignup = () => {
   emit('showSignUp')
+}
+
+const showApp = () => {
+  emit('showApp')
 }
 
 </script>
@@ -48,7 +61,7 @@ const goToSignup = () => {
     display: grid;
     justify-items: center;
     align-items: center;
-    grid-template-rows: 3.5fr 3fr 7fr;
+    grid-template-rows: 1fr 1fr 3fr;
     position: relative;
 }
 
@@ -59,46 +72,29 @@ const goToSignup = () => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-#logo {
-    width: 150px;
-    height: 120px;
-    /* aspect-ratio: 1 / 1; */
-}
-
-#subtitle {
-    width: 70%;
     text-align: center;
-    font-size: 20px;
+}
+
+#content--title {
     color: var(--white);
 }
 
 #content--buttons {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.buttons {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.subtext {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     color: var(--white);
 }
 
-.register-buttons {
-    width: 70%;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.buttons--row-group {
+    width: 100%;
+    height: 100%;
+}
+
+.subtext {
+    font-size: 17.5px;
+    margin-bottom: 5px;
 }
 
 </style>

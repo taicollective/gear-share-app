@@ -81,7 +81,7 @@ module.exports = configure(function (/* ctx */) {
       // https: true
       // if you want to display the app on your phone, run this code below
       // but change host to be your local ip, otherwise comment it
-      host: '192.168.1.194',
+      host: '192.168.1.221',
       port: '8000',
       open: true // opens browser window automatically
     },

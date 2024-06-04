@@ -19,7 +19,7 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-
+      'store'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -81,9 +81,10 @@ module.exports = configure(function (/* ctx */) {
       // https: true
       // if you want to display the app on your phone, run this code below
       // but change host to be your local ip, otherwise comment it
-      host: '192.168.1.221',
+      // host: '192.168.1.194', - oli's ip
+      host: '192.168.1.29', // - ian's ip
       port: '8000',
-      open: true // opens browser window automatically
+      open: true
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

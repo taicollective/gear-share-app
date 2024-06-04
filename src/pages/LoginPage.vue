@@ -9,7 +9,7 @@
             <h6 class="inter-regular subtitle">Email</h6>
           </div>
           <div class="form--row form--input-wrapper">
-            <input type="text" class="input-l" id="email">
+            <input v-model="email" type="text" class="input-l" id="email">
           </div>
         </div>
         <div class="form--row-group">
@@ -17,28 +17,66 @@
             <h6 class="inter-regular subtitle">Password</h6>
           </div>
           <div class="form--row form--input-wrapper">
-            <input type="password" class="input-l" id="password">
+            <input v-model="password" type="password" class="input-l" id="password">
           </div>
         </div>
       </div>
       <div id="content--button" class="content">
-        <button class="btn-l">Log In</button>
+        <button class="btn-l" @click="login">Log In</button>
         <p class="underlined" @click="switchToSignUp">Don't have an account?</p>
       </div>
+
+       <!-- Add loadig spinner to parent -->
+      <q-inner-loading
+        :showing="loading"
+        label="Please wait..."
+        label-class="text-orange"
+        label-style="font-size: 1.1em"
+      />
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence } from 'firebase/auth'
+import { useStore } from 'vuex'
+
 defineOptions({
   name: 'LoginPage'
 })
 
-const emit = defineEmits(['showSignUp'])
+const emit = defineEmits(['showSignUp', 'showWelcomeSplash'])
+const store = useStore()
+
+const email = ref('')
+const password = ref('')
+const loading = ref(false)
 
 const switchToSignUp = () => {
   emit('showSignUp')
 }
 
+const login = async () => {
+  loading.value = true
+  const auth = getAuth()
+  try {
+    await setPersistence(auth, browserLocalPersistence)
+    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value)
+    const user = userCredential.user
+    console.log('User logged in successfully:', user)
+    // use fetchUser store action to get user data from firestore and save it to store state
+    if (store && typeof store.dispatch === 'function') {
+      await store.dispatch('fetchUser', user.uid)
+    } else {
+      console.error('Store is not initialized correctly')
+    }
+    loading.value = false
+    emit('showWelcomeSplash')
+  } catch (error) {
+    console.error('Error logging in user:', error)
+    loading.value = false
+  }
+}
 </script>
 
 <style scoped>

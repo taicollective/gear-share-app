@@ -1,24 +1,20 @@
 <template>
     <div id="layout-view">
-        <div id="basketball-court"></div>
-        <div id="orange-gradient"></div>
-        <div id="black-overlay"></div>
-        <div id="view--content">
-          <WelcomePage v-if="welcome" @showLogIn="showLoginPage" @showSignUp="showSignUpPage"/>
-          <LoginPage v-if="login" @showSignUp="showSignUpPage" @showWelcomeSplash="showWelcomeSplash"/>
-          <SignUpPage v-if="signup" @showLogIn="showLoginPage" @showWelcomeSplash="showWelcomeSplash"/>
-
-          <WelcomeSplash v-if="welcomeSplash" @next="showLoggedInPage"/>
-        </div>
+      <BackgroundEl/>
+      <div id="view--content">
+        <WelcomePage v-if="welcome" @showLogIn="showLoginPage" @showSignUp="showSignUpPage"/>
+        <LoginPage v-if="login" @showSignUp="showSignUpPage"/>
+        <SignUpPage v-if="signup" @showLogIn="showLoginPage"/>
+      </div>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import WelcomePage from '../pages/WelcomePage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import SignUpPage from '../pages/SignUpPage.vue'
-import WelcomeSplash from '../pages/WelcomeSplash.vue'
+import WelcomePage from '../pages/WelcomePage.vue'
+import BackgroundEl from 'src/components/BackgroundEl.vue'
 
 defineOptions({
   name: 'WelcomeLayout'
@@ -27,32 +23,18 @@ defineOptions({
 const welcome = ref(true)
 const login = ref(false)
 const signup = ref(false)
-const welcomeSplash = ref(false)
 
 const showLoginPage = () => {
   console.log('showing log in page')
   welcome.value = false
   login.value = true
   signup.value = false
-  welcomeSplash.value = false
 }
 
 const showSignUpPage = () => {
   welcome.value = false
   login.value = false
   signup.value = true
-  welcomeSplash.value = false
-}
-
-const showWelcomeSplash = () => {
-  welcome.value = false
-  login.value = false
-  signup.value = false
-  welcomeSplash.value = true
-}
-
-const showLoggedInPage = () => {
-  alert('TODO: make a logged in page')
 }
 
 </script>

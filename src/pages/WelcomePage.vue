@@ -17,23 +17,16 @@
                 <p class="subtext">Don't have an account?</p>
                 <button class="btn-l" @click="goToSignup">SIGN UP</button>
             </div>
-            <div class="buttons--row-group">
-                <button class="btn-l" @click="showApp">
-                    <RouterLink to="/home" class="link">CONTINUE</RouterLink>
-                </button>
-            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
-
 defineOptions({
   name: 'WelcomePage'
 })
 
-const emit = defineEmits(['showLogIn', 'showSignUp', 'showApp'])
+const emit = defineEmits(['showLogIn', 'showSignUp'])
 
 const goToLogin = () => {
   emit('showLogIn')
@@ -41,10 +34,6 @@ const goToLogin = () => {
 
 const goToSignup = () => {
   emit('showSignUp')
-}
-
-const showApp = () => {
-  emit('showApp')
 }
 
 </script>

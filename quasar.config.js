@@ -79,10 +79,7 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      // if you want to display the app on your phone, run this code below
-      // but change host to be your local ip, otherwise comment it
-      // host: '192.168.1.194', - oli's ip
-      host: '192.168.1.29', // - ian's ip
+      // you don't need the global IP setting, it already does it
       port: '8000',
       open: true
     },

@@ -26,7 +26,7 @@
         <p class="underlined" @click="switchToSignUp">Don't have an account?</p>
       </div>
 
-       <!-- Add loadig spinner to parent -->
+      <!-- Add loadig spinner to parent -->
       <q-inner-loading
         :showing="loading"
         label="Please wait..."
@@ -38,15 +38,18 @@
 
 <script setup>
 import { ref } from 'vue'
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence } from 'firebase/auth'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence } from 'firebase/auth'
 
 defineOptions({
   name: 'LoginPage'
 })
 
-const emit = defineEmits(['showSignUp', 'showWelcomeSplash'])
 const store = useStore()
+const router = useRouter()
+
+const emit = defineEmits(['showSignUp'])
 
 const email = ref('')
 const password = ref('')
@@ -71,7 +74,7 @@ const login = async () => {
       console.error('Store is not initialized correctly')
     }
     loading.value = false
-    emit('showWelcomeSplash')
+    router.push('/home')
   } catch (error) {
     console.error('Error logging in user:', error)
     loading.value = false

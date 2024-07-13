@@ -1,31 +1,52 @@
 <template>
     <div id="layout-view">
-        <div id="basketball-court"></div>
-        <div id="orange-gradient"></div>
-        <div id="black-overlay"></div>
-        <div id="view--content">
-          <button class="btn-l content">
-            <h6 class="large-text inter-bold">TRADE</h6>
-            <p class="small-text inter-bold">&</p>
-            <h6 class="large-text inter-bold">DONATE</h6>
-          </button>
-          <button class="btn-l content">
-            <h6 class="large-text inter-bold">RENTING</h6>
-          </button>
-          <button class="btn-l content">
-            <h6 class="large-text inter-bold">PARTNER</h6>
-            <p class="small-text inter-bold">WITH</p>
-            <h6 class="large-text inter-bold">US</h6>
-          </button>
-          <button class="btn-l content">INVENTORY</button>
+      <BackgroundEl/>
+      <div id="view--content">
+        <div class="content">
+          <div id="user"></div>
+          <h5 class="inter-bold">Welcome, {{ user.fullName.split(" ")[0] }}! </h5>
         </div>
+        <RouterLink to="/trade-and-donate" class="link">
+          <button class="btn-l content">
+            <h5 class="inter-bold">TRADE</h5>
+            <p class="inter-bold">&</p>
+            <h5 class="inter-bold">DONATE</h5>
+          </button>
+        </RouterLink>
+        <button class="btn-l content">
+          <h5 class="inter-bold">RENTING</h5>
+        </button>
+        <button class="btn-l content">
+          <h5 class="inter-bold">PARTNER</h5>
+          <p class="inter-bold">WITH</p>
+          <h3 class="inter-bold">US</h3>
+        </button>
+        <RouterLink to="/inventory" class="link">
+          <button class="btn-l content">
+            <h5 class="inter-bold">INVENTORY</h5>
+          </button>
+        </RouterLink>
+      </div>
     </div>
 </template>
 
 <script setup>
+import BackgroundEl from '../components/BackgroundEl.vue'
+
+import { RouterLink } from 'vue-router'
+
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
+
 defineOptions({
-  name: 'HomeLayout.vue'
+  name: 'HomeLayout'
 })
+
+const user = computed(() => {
+  return store.state.user
+})
+
 </script>
 
 <style scoped>
@@ -36,34 +57,12 @@ defineOptions({
   position: relative;
 }
 
-#basketball-court, #black-overlay, #orange-gradient {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  z-index: -1;
-}
-
-#basketball-court {
-  background-image: url("../assets/red-basketball-court.png");
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
-}
-
-#orange-gradient {
-  background: linear-gradient(0deg, rgba(255,92,0,0) 0%, rgba(255,92,0,0.6) 100%);
-}
-
-#black-overlay {
-  background-color: rgba(0, 0, 0, 0.2)
-}
-
 #view--content {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 3fr 3fr 3fr 1.5fr;
+  grid-template-rows: 2fr 2fr 2fr 2fr 1fr;
   grid-gap: calc(var(--margin) * 2);
   padding: calc(var(--padding) * 2);
 }
@@ -73,7 +72,22 @@ defineOptions({
   height: 100%;
   padding: 0;
   margin: 0;
-  aspect-ratio: 0;;
+  aspect-ratio: 0;
+}
+
+.content:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#user {
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--theme-8);
+  border-radius: 50%;
+  margin-bottom: var(--margin);
 }
 
 .large-text {

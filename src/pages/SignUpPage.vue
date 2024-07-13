@@ -53,13 +53,16 @@
 </template>
 
 <script setup>
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { ref } from 'vue'
 import { db } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
-import { ref } from 'vue'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
 const store = useStore()
+const router = useRouter()
 
 defineOptions({
   name: 'SignUpPage'
@@ -98,7 +101,7 @@ const signUp = async () => {
     // save user to store
     store.commit('setUser', user)
     loading.value = false
-    emit('showWelcomeSplash')
+    router.push('/home')
     console.log('User signed up successfully')
   } catch (error) {
     console.error(error)

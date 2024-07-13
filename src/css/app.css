@@ -58,6 +58,7 @@ button {
     padding: var(--padding);
     border-radius: var(--radius);
     font-weight: 700;
+    text-decoration: none;
 }
 
 .inter-thin { font-weight: 100; }
@@ -97,3 +98,4 @@ button {
     text-decoration: none;
     color: inherit;
 }
+

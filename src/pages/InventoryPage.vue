@@ -11,6 +11,8 @@
 
     <div class="gear-list">
       <div class="text-white q-pa-md" v-for="gearItem in gearItems" :key="gearItem.id" :gearItem="gearItem">
+        <q-img :src="gearItem.image" spinner-color="white"
+            style="height: 200px; max-width: 200px; border-radius: 10px" />
         <p>{{ gearItem.name }}</p>
         <p>{{ gearItem.condition }}</p>
         <p>{{ gearItem.price }}</p>
@@ -27,19 +29,15 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { db } from '../firebase'
+import { collection, getDocs } from 'firebase/firestore'
 
-defineOptions({
-  name: 'InventoryPage'
-})
+const gearItems = ref([])
 
-const gearItems = ref([
-  { id: 1, name: 'Basketball', condition: 'Good', price: 100 },
-  { id: 2, name: 'Tennis Racket', condition: 'Fair', price: 50 },
-  { id: 3, name: 'Volleyball net', condition: 'Poor', price: 25 }
-])
-
-onMounted(() => {
-  console.log('Component is mounted')
+onMounted(async () => {
+  // get collection gears from firestore
+  const querySnapshot = await getDocs(collection(db, 'gears'))
+  gearItems.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 })
 
 </script>

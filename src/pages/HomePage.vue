@@ -1,33 +1,33 @@
 <template>
-    <div id="layout-view">
-      <BackgroundEl/>
-      <div id="view--content">
-        <div class="content">
-          <div id="user"></div>
-          <h5 class="inter-bold">Welcome, {{ user.fullName.split(" ")[0] }}! </h5>
+  <div id="layout-view">
+    <BackgroundEl />
+    <div id="view--content">
+      <div class="content">
+        <div id="content--logo" class="content">
+          <img src="../assets/gear-share-logo.png" class="logo-sm">
         </div>
-        <RouterLink to="/trade-and-donate" class="link">
-          <button class="btn-l content">
-            <h5 class="inter-bold">TRADE</h5>
-            <p class="inter-bold">&</p>
-            <h5 class="inter-bold">DONATE</h5>
-          </button>
-        </RouterLink>
-        <button class="btn-l content">
-          <h5 class="inter-bold">RENTING</h5>
-        </button>
-        <button class="btn-l content">
-          <h5 class="inter-bold">PARTNER</h5>
-          <p class="inter-bold">WITH</p>
-          <h3 class="inter-bold">US</h3>
-        </button>
-        <RouterLink to="/inventory" class="link">
-          <button class="btn-l content">
-            <h5 class="inter-bold">INVENTORY</h5>
-          </button>
-        </RouterLink>
+        <h5 class="inter-bold text-white">Welcome, {{ user.fullName.split(" ")[0] }}! </h5>
       </div>
+      <RouterLink to="/trade-and-donate" class="link">
+        <button class="btn-l content">
+          <h5 class="inter-bold">TRADE</h5>
+          <p class="inter-bold">&</p>
+          <h5 class="inter-bold">DONATE</h5>
+        </button>
+      </RouterLink>
+      <button class="btn-l content">
+        <h5 class="inter-bold">RENTING</h5>
+      </button>
+      <button class="btn-l content">
+        <h5 class="inter-bold">PARTNER WITH US</h5>
+      </button>
+      <RouterLink to="/inventory" class="link">
+        <button class="btn-l content">
+          <h5 class="inter-bold">INVENTORY</h5>
+        </button>
+      </RouterLink>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -50,7 +50,9 @@ const user = computed(() => {
 </script>
 
 <style scoped>
-
+h5 {
+  font-size: 20px;
+}
 #layout-view {
   width: 100vw;
   height: 100vh;
@@ -69,7 +71,7 @@ const user = computed(() => {
 
 .content {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   padding: 0;
   margin: 0;
   aspect-ratio: 0;
@@ -97,5 +99,4 @@ const user = computed(() => {
 .small-text {
   font-size: 25px;
 }
-
 </style>

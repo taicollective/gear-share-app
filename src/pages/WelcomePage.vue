@@ -45,8 +45,7 @@ const goToSignup = () => {
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;
+padding-top: 20px;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -69,6 +68,7 @@ const goToSignup = () => {
 }
 
 #content--buttons {
+    padding-top: 30px;
     width: 100%;
     height: 100%;
     display: grid;

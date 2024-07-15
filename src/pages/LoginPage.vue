@@ -85,8 +85,9 @@ const login = async () => {
 <style scoped>
 
 #container {
-  width: 100vw;
-  height: 100vh;
+  padding-top:20px;
+  /* width: 100vw;
+  height: 90vh; */
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-columns: 1fr;

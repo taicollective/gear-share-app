@@ -19,7 +19,7 @@ defineOptions({
 #basketball-court, #black-overlay, #orange-gradient {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 

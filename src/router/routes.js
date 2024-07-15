@@ -1,7 +1,9 @@
 import WelcomeLayout from 'layouts/WelcomeLayout.vue'
-import HomeLayout from 'layouts/HomeLayout.vue'
-import TradeAndDonateLayout from 'layouts/TradeAndDonateLayout.vue'
+import HomePage from 'pages/HomePage.vue'
+
 import InventoryLayout from 'layouts/InventoryLayout.vue'
+import InventoryPage from 'pages/InventoryPage.vue'
+import AddGearItem from 'pages/AddGearItem.vue'
 
 const routes = [
   {
@@ -10,15 +12,25 @@ const routes = [
   },
   {
     path: '/home',
-    component: HomeLayout
+    component: HomePage
   },
   {
-    path: '/trade-and-donate',
-    component: TradeAndDonateLayout
+    path: '/trade-and-donate'
+    // component: TradeAndDonatePage
   },
   {
     path: '/inventory',
-    component: InventoryLayout
+    component: InventoryLayout,
+    children: [
+      {
+        path: '',
+        component: InventoryPage
+      },
+      {
+        path: '/add',
+        component: AddGearItem
+      }
+    ]
   }
 
   // Always leave this as last one,

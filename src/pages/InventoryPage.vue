@@ -10,13 +10,14 @@
     </q-header>
 
     <div class="gear-list">
-      <div class="text-white q-pa-md" v-for="gearItem in gearItems" :key="gearItem.id" :gearItem="gearItem">
+      <!-- <div class="text-white q-pa-md" v-for="gearItem in gearItems" :key="gearItem.id" :gearItem="gearItem">
         <q-img :src="gearItem.image" spinner-color="white"
             style="height: 200px; max-width: 200px; border-radius: 10px" />
         <p>{{ gearItem.name }}</p>
         <p>{{ gearItem.condition }}</p>
         <p>{{ gearItem.price }}</p>
-      </div>
+      </div> -->
+      <GearItem itemStyle="3" v-for="gear in gearItems" :key="gear.id" :gearInfo="gear"/>
     </div>
 
     <q-footer class="bg-transparent text-white">
@@ -28,6 +29,8 @@
 </template>
 
 <script setup>
+import GearItem from '../components/GearItem.vue'
+
 import { onMounted, ref } from 'vue'
 import { db } from '../firebase'
 import { collection, getDocs } from 'firebase/firestore'
@@ -47,4 +50,12 @@ onMounted(async () => {
   font-weight: 800;
   font-size: 40px
 }
+
+.gear-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 </style>

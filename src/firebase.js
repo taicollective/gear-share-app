@@ -3,15 +3,17 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage' // Import getStorage
 
+import secrets from './secrets'
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDaVAnF1ouXEy6Ys04fZlmTwncVD1N18hk',
-  authDomain: 'gear-share-687b7.firebaseapp.com',
-  projectId: 'gear-share-687b7',
-  storageBucket: 'gear-share-687b7.appspot.com',
-  messagingSenderId: '652563073493',
-  appId: '1:652563073493:web:9733c7cf19ed22f155c',
-  measurementId: 'G-H7FL60N3FE'
+  apiKey: secrets.firebaseConfig.apiKey,
+  authDomain: secrets.firebaseConfig.authDomain,
+  projectId: secrets.firebaseConfig.projectId,
+  storageBucket: secrets.firebaseConfig.storageBucket,
+  messagingSenderId: secrets.firebaseConfig.messagingSenderId,
+  appId: secrets.firebase,
+  measurementId: secrets.firebaseConfig.measurementId
 }
 
 // Initialize Firebase

@@ -42,8 +42,10 @@
 
     <q-footer class="bg-transparent text-white">
       <q-toolbar>
+        <q-btn color="black" size="large" class="q-mb-md q-px-lg text-white"
+          style="font-weight: 800" to="/inventory">BACK</q-btn>
         <q-btn @click="saveNewItem" color="white" size="large" class="q-mb-md q-px-lg text-black"
-          style="font-weight: 800">SAVE</q-btn>
+        style="font-weight: 800">SAVE</q-btn>
       </q-toolbar>
     </q-footer>
 
@@ -69,7 +71,9 @@ const newGearItem = ref({
   name: '',
   condition: '',
   price: null,
-  image: null
+  image: null,
+  location: null,
+  status: 'available'
 })
 
 const fileInput = ref(null)

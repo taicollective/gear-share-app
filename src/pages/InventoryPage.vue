@@ -10,18 +10,12 @@
     </q-header>
 
     <div class="gear-list">
-      <!-- <div class="text-white q-pa-md" v-for="gearItem in gearItems" :key="gearItem.id" :gearItem="gearItem">
-        <q-img :src="gearItem.image" spinner-color="white"
-            style="height: 200px; max-width: 200px; border-radius: 10px" />
-        <p>{{ gearItem.name }}</p>
-        <p>{{ gearItem.condition }}</p>
-        <p>{{ gearItem.price }}</p>
-      </div> -->
       <GearItem itemStyle="3" v-for="gear in gearItems" :key="gear.id" :gearInfo="gear"/>
     </div>
 
     <q-footer class="bg-transparent text-white">
       <q-toolbar>
+        <q-btn to="/home" color="black" size="large" class="q-mb-md q-px-lg text-white" style="font-weight: 800">BACK</q-btn>
         <q-btn to="/add" color="white" size="large" class="q-mb-md q-px-lg text-black" style="font-weight: 800">+ ADD</q-btn>
       </q-toolbar>
     </q-footer>

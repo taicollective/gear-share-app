@@ -21,6 +21,6 @@ defineOptions({
 
 <style scoped>
 .title {
-  font-weight: 800
+  font-weight: 800;
 }
 </style>

@@ -187,7 +187,7 @@ const navigateToEdit = () => {
   console.log("navigating to edit screen");
   router.push({
     path: "/edit",
-    query: { gearInfo: JSON.stringify(gearItemSelected.value) },
+    query: { gearInfoProp: JSON.stringify(gearItemSelected.value) },
   });
 };
 

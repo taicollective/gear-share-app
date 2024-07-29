@@ -63,7 +63,7 @@
       <!--===== PRICE =====-->
       <label class="new-gear-label text-white q-ml-md">Price:</label>
       <q-input
-        v-model="newGearItem.price"
+        v-model.number="newGearItem.price"
         type="number"
         bg-color="white"
         class="q-ma-md input-text"
@@ -86,7 +86,7 @@
           size="x-large"
           class="q-mb-md q-px-lg text-black q-ml-md"
           style="font-weight: 800"
-          :disabled="!isChanged"
+          :disabled="editMode && !isChanged"
           >SAVE</q-btn
         >
       </q-toolbar>
@@ -120,17 +120,24 @@ const $q = useQuasar();
 
 // Define props
 const props = defineProps({
-  gearInfo: {
+  gearInfoProp: {
     type: String,
   },
 });
 
-const gearInfo = ref(JSON.parse(props.gearInfo));
+const gearInfo = ref({});
+
+if (props.gearInfoProp) {
+  gearInfo.value = JSON.parse(props.gearInfoProp);
+  gearInfo.value.condition = Number(gearInfo.value.condition);
+  gearInfo.value.price = Number(gearInfo.value.price);
+  console.log("gear info after being propped in", gearInfo.value);
+}
 
 const newGearItem = ref({
   name: "",
-  condition: "",
-  price: null,
+  condition: 0,
+  price: 0,
   image: null,
   location: null,
   status: "available",
@@ -187,7 +194,7 @@ const saveNewItem = async () => {
 
       $q.notify({
         color: "positive",
-        message: "Item saved successfully!",
+        message: "Item updated successfully!",
       });
       router.push("/inventory");
     } catch (error) {
@@ -245,6 +252,7 @@ const saveNewItem = async () => {
   font-weight: 600;
 }
 </style>
+
 <style>
 .q-field__native {
   padding: 0px 20px;

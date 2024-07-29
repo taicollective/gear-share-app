@@ -1,5 +1,4 @@
 <template>
-
   <div class="content">
     <q-header class="bg-transparent text-white">
       <q-toolbar>
@@ -15,132 +14,230 @@
 
       <div class="row">
         <div class="col">
-          <q-btn @click="testclick" color="black" icon="add_a_photo" stack glossy size="xl" label="Upload"
-            class="q-mx-md"></q-btn>
-          <q-file ref="fileInput" @input="handleFileChange" accept="image/*" bg-color="white" class="q-ma-md"
-            style="display: none" />
-          <!-- <q-input type="file" @change="handleFileChange" class="q-ma-md" /> -->
+          <q-btn
+            @click="testclick"
+            color="black"
+            icon="add_a_photo"
+            stack
+            glossy
+            size="xl"
+            label="Upload"
+            class="q-mx-md"
+          ></q-btn>
+          <q-file
+            ref="fileInput"
+            @input="handleFileChange"
+            accept="image/*"
+            bg-color="white"
+            class="q-ma-md"
+            style="display: none"
+          />
         </div>
         <div class="col-7">
-          <q-img :src="newGearItem.image" spinner-color="white"
-            style="height: 200px; max-width: 200px; border-radius: 10px" />
+          <q-img
+            :src="newGearItem.image"
+            spinner-color="white"
+            style="height: 200px; max-width: 200px; border-radius: 10px"
+          />
         </div>
       </div>
       <!--=====  NAME =====-->
       <label class="new-gear-label text-white q-ml-md">Gear:</label>
-      <q-input v-model="newGearItem.name" bg-color="white" class="q-ma-md input-text" />
+      <q-input
+        v-model="newGearItem.name"
+        bg-color="white"
+        class="q-ma-md input-text"
+      />
       <!--===== CONDITION =====-->
       <label class="new-gear-label text-white q-ml-md">Condition:</label>
-      <br>
-      <q-rating v-model="newGearItem.condition" size="3.5em" color="amber" icon="star_border" icon-selected="star"
-        class="q-mx-md q-mb-md" />
-      <br>
+      <br />
+      <q-rating
+        v-model="newGearItem.condition"
+        size="3.5em"
+        color="amber"
+        icon="star_border"
+        icon-selected="star"
+        class="q-mx-md q-mb-md"
+      />
+      <br />
       <!--===== PRICE =====-->
-      <label class="new-gear-label text-white q-ma-md">Price:</label>
-      <q-input v-model="newGearItem.price" type="number" bg-color="white" class="q-ma-md" />
+      <label class="new-gear-label text-white q-ml-md">Price:</label>
+      <q-input
+        v-model="newGearItem.price"
+        type="number"
+        bg-color="white"
+        class="q-ma-md input-text"
+      />
     </div>
 
     <q-footer class="bg-transparent text-white">
       <q-toolbar>
-        <q-btn color="black" size="large" class="q-mb-md q-px-lg text-white"
-          style="font-weight: 800" to="/inventory">BACK</q-btn>
-        <q-btn @click="saveNewItem" color="white" size="large" class="q-mb-md q-px-lg text-black"
-        style="font-weight: 800">SAVE</q-btn>
+        <q-btn
+          color="black"
+          size="x-large"
+          class="q-mb-md q-px-lg text-white"
+          style="font-weight: 800"
+          to="/inventory"
+          >BACK</q-btn
+        >
+        <q-btn
+          @click="saveNewItem"
+          color="white"
+          size="x-large"
+          class="q-mb-md q-px-lg text-black q-ml-md"
+          style="font-weight: 800"
+          :disabled="!isChanged"
+          >SAVE</q-btn
+        >
       </q-toolbar>
     </q-footer>
 
     <q-inner-loading :showing="loading">
-      <q-spinner-gears size="50px" color="primary" label="Please wait..." label-class="text-orange"
-        label-style="font-size: 1.1em" />
+      <q-spinner-gears
+        size="50px"
+        color="primary"
+        label="Please wait..."
+        label-class="text-orange"
+        label-style="font-size: 1.1em"
+      />
     </q-inner-loading>
   </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useQuasar } from 'quasar'
-import { db, storage } from '../firebase'
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { collection, addDoc } from 'firebase/firestore'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from "vue";
+import { useQuasar } from "quasar";
+import { db, storage } from "../firebase";
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { useRouter } from "vue-router";
 
-const $q = useQuasar()
+const $q = useQuasar();
+
+// Define props
+const props = defineProps({
+  gearInfo: {
+    type: String,
+  },
+});
+
+const gearInfo = ref(JSON.parse(props.gearInfo));
 
 const newGearItem = ref({
-  name: '',
-  condition: '',
+  name: "",
+  condition: "",
   price: null,
   image: null,
   location: null,
-  status: 'available'
-})
+  status: "available",
+});
 
-const fileInput = ref(null)
-const loading = ref(false)
-const router = useRouter()
+onMounted(async () => {
+  if (gearInfo.value) {
+    editMode.value = true;
+    newGearItem.value = { ...gearInfo.value };
+  }
+});
+
+const isChanged = computed(() => {
+  const isChanged =
+    JSON.stringify(newGearItem.value) !== JSON.stringify(gearInfo.value);
+  return isChanged;
+});
+
+const fileInput = ref(null);
+const loading = ref(false);
+const editMode = ref(false);
+const router = useRouter();
 
 const testclick = () => {
-  console.log('testclick')
-  fileInput.value.pickFiles()
-}
+  fileInput.value.pickFiles();
+};
 
 const handleFileChange = async (event) => {
-  console.log('handle', event)
-  const file = event.target.files[0]
-  if (!file) return
-  console.log('newGearItem.value.image: ', file)
-  const imageRef = storageRef(storage, `gear-images/${file.name}`)
+  const file = event.target.files[0];
+  if (!file) return;
+  const imageRef = storageRef(storage, `gear-images/${file.name}`);
   try {
-    const snapshot = await uploadBytes(imageRef, file)
-    newGearItem.value.image = await getDownloadURL(snapshot.ref)
+    const snapshot = await uploadBytes(imageRef, file);
+    newGearItem.value.image = await getDownloadURL(snapshot.ref);
   } catch (error) {
     $q.notify({
-      color: 'negative',
-      message: 'Error saving the image.'
-    })
+      color: "negative",
+      message: "Error saving the image.",
+    });
   }
-}
+};
 
 const saveNewItem = async () => {
-  loading.value = true
-  if (!newGearItem.value.image) {
-    $q.notify({
-      color: 'negative',
-      message: 'Please select an image.'
-    })
-    return
+  loading.value = true;
+
+  // EDIT
+  if (editMode.value) {
+    try {
+      // Get a reference to the document
+      const docRef = doc(db, "gears", newGearItem.value.id);
+
+      // Update the document
+      await updateDoc(docRef, newGearItem.value);
+
+      $q.notify({
+        color: "positive",
+        message: "Item saved successfully!",
+      });
+      router.push("/inventory");
+    } catch (error) {
+      $q.notify({
+        color: "negative",
+        message: "Error saving Gear item:" + error,
+      });
+    }
   }
 
-  try {
-    const newItem = { ...newGearItem.value }
-    await addDoc(collection(db, 'gears'), newItem)
-    $q.notify({
-      color: 'positive',
-      message: 'Item saved successfully!'
-    })
-    router.push('/inventory')
-  } catch (error) {
-    console.error('Error saving Gear item: ', error)
-    $q.notify({
-      color: 'negative',
-      message: 'Error saving Gear item.'
-    })
-  }
-  loading.value = false
-}
+  // SAVE
+  else {
+    if (!newGearItem.value.image) {
+      $q.notify({
+        color: "negative",
+        message: "Please select an image.",
+      });
+      loading.value = false;
+      return;
+    }
 
+    try {
+      const newItem = { ...newGearItem.value };
+      await addDoc(collection(db, "gears"), newItem);
+      $q.notify({
+        color: "positive",
+        message: "Item saved successfully!",
+      });
+      router.push("/inventory");
+    } catch (error) {
+      $q.notify({
+        color: "negative",
+        message: "Error saving Gear item.",
+      });
+    }
+  }
+
+  loading.value = false;
+};
 </script>
 
 <style scoped>
 .title {
   font-weight: 800;
-  font-size: 40px
+  font-size: 40px;
 }
 
 .new-gear-label {
   font-size: x-large;
-  font-weight: 600
+  font-weight: 600;
 }
 
 .input-text {
@@ -150,6 +247,6 @@ const saveNewItem = async () => {
 </style>
 <style>
 .q-field__native {
-  padding: 0px 20px
+  padding: 0px 20px;
 }
 </style>

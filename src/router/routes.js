@@ -1,5 +1,6 @@
 import WelcomeLayout from "layouts/WelcomeLayout.vue";
 import HomePage from "pages/HomePage.vue";
+import PartnerWithUs from "pages/PartnerWithUs.vue";
 
 import InventoryLayout from "layouts/InventoryLayout.vue";
 import InventoryPage from "pages/InventoryPage.vue";
@@ -25,6 +26,10 @@ const routes = [
         component: ItemSelectPage,
       },
     ],
+  },
+  {
+    path: "/partner-with-us",
+    component: PartnerWithUs,
   },
   {
     path: "/inventory",

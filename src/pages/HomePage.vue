@@ -21,9 +21,11 @@
         <button class="btn-l">
           <h5 class="inter-bold">RENTING</h5>
         </button>
-        <button class="btn-l">
-          <h5 class="inter-bold">PARTNER WITH US</h5>
-        </button>
+        <RouterLink to="/partner-with-us" class="link">
+          <button class="btn-l">
+            <h5 class="inter-bold">PARTNER WITH US</h5>
+          </button>
+        </RouterLink>
         <RouterLink to="/inventory" class="link">
           <button class="btn-l">
             <h5 class="inter-bold">INVENTORY</h5>

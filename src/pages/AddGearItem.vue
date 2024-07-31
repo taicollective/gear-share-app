@@ -92,15 +92,16 @@
       </q-toolbar>
     </q-footer>
 
-    <q-inner-loading :showing="loading">
-      <q-spinner-gears
-        size="50px"
-        color="primary"
-        label="Please wait..."
-        label-class="text-orange"
-        label-style="font-size: 1.1em"
-      />
-    </q-inner-loading>
+    <!-- Add loadig spinner to parent -->
+    <q-inner-loading
+      :showing="loading"
+      size="xl"
+      color="orange"
+      label="Please wait..."
+      label-class="text-orange"
+      label-style="font-size: 3em; font-weight: 800"
+      :dark="true"
+    />
   </div>
 </template>
 
@@ -125,7 +126,7 @@ const props = defineProps({
   },
 });
 
-const gearInfo = ref({});
+const gearInfo = ref(null);
 
 if (props.gearInfoProp) {
   gearInfo.value = JSON.parse(props.gearInfoProp);
@@ -166,6 +167,7 @@ const testclick = () => {
 };
 
 const handleFileChange = async (event) => {
+  loading.value = true;
   const file = event.target.files[0];
   if (!file) return;
   const imageRef = storageRef(storage, `gear-images/${file.name}`);
@@ -178,6 +180,7 @@ const handleFileChange = async (event) => {
       message: "Error saving the image.",
     });
   }
+  loading.value = false;
 };
 
 const saveNewItem = async () => {
@@ -218,6 +221,8 @@ const saveNewItem = async () => {
 
     try {
       const newItem = { ...newGearItem.value };
+      console.log("new item to save: ", newItem);
+      console.log("ref: ", collection(db, "gears"));
       await addDoc(collection(db, "gears"), newItem);
       $q.notify({
         color: "positive",

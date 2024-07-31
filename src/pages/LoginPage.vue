@@ -50,9 +50,12 @@
     <!-- Add loadig spinner to parent -->
     <q-inner-loading
       :showing="loading"
+      size="xl"
+      color="orange"
       label="Please wait..."
       label-class="text-orange"
-      label-style="font-size: 1.1em"
+      label-style="font-size: 3em; font-weight: 800"
+      :dark="true"
     />
   </div>
 </template>
@@ -67,6 +70,8 @@ import {
   signInWithEmailAndPassword,
   browserLocalPersistence,
 } from "firebase/auth";
+import { useQuasar } from "quasar";
+const $q = useQuasar();
 
 defineOptions({
   name: "LoginPage",
@@ -108,6 +113,10 @@ const login = async () => {
     router.push("/home");
   } catch (error) {
     console.error("Error logging in user:", error);
+    $q.notify({
+      color: "negative",
+      message: "Error logging in: " + error,
+    });
     loading.value = false;
   }
 };

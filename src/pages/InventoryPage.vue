@@ -22,11 +22,13 @@
         size="sm"
         color="orange"
         text-color="white"
+        clickable
         @click="filterByStatus('renting')"
       >
         RENTING
       </q-chip>
       <q-chip
+        clickable
         @click="filterByStatus('rented')"
         size="sm"
         color="grey"
@@ -34,18 +36,28 @@
         >RENTED</q-chip
       >
       <q-chip
+        clickable
         @click="filterByStatus('available')"
         size="sm"
         color="green"
         text-color="white"
-        >AVAIALBLE TO TRADE OR DONATE</q-chip
+        >AVAILABLE TO TRADE OR DONATE</q-chip
       >
+      <q-chip
+        clickable
+        @click="cancelChipFilters"
+        size="sm"
+        color="white"
+        text-color="black"
+      >
+        <q-icon name="close" />
+      </q-chip>
     </div>
 
     <div class="gear-list">
       <GearItem
         itemStyle="3"
-        v-for="gear in filteredGearItems"
+        v-for="gear in chipFilters.length > 0 ? chipFilters : filteredGearItems"
         :key="gear.id"
         :gearInfo="gear"
         @itemClicked="itemClicked"
@@ -146,6 +158,7 @@ const gearItems = ref([]);
 const search = ref("");
 const showGearDialog = ref("false");
 const gearItemSelected = ref({});
+const chipFilters = ref([]);
 
 const router = useRouter();
 
@@ -160,31 +173,36 @@ const filteredGearItems = computed(() => {
 
 // function to filter gearItems by status
 const filterByStatus = (status) => {
-  console.log("filtering by ", status);
+  console.log("Filtering by status:", status); // Debug log
   if (status === "renting") {
-    gearItems.value = gearItems.value.filter(
+    chipFilters.value = gearItems.value.filter(
       (gear) => gear.status === "renting"
     );
   } else if (status === "rented") {
-    gearItems.value = gearItems.value.filter(
+    chipFilters.value = gearItems.value.filter(
       (gear) => gear.status === "rented"
     );
   } else if (status === "available") {
-    gearItems.value = gearItems.value.filter(
+    chipFilters.value = gearItems.value.filter(
       (gear) => gear.status === "available"
     );
   }
+  console.log("Filtered items:", gearItems.value); // Debug log
+};
+
+const cancelChipFilters = () => {
+  chipFilters.value = [];
 };
 
 // gear item clicked
 const itemClicked = (payload) => {
   showGearDialog.value = true;
   gearItemSelected.value = payload;
-  console.log("gear item selected is:", gearItemSelected.value);
+  console.log("Gear item selected is:", gearItemSelected.value); // Debug log
 };
 
 const navigateToEdit = () => {
-  console.log("navigating to edit screen");
+  console.log("Navigating to edit screen");
   router.push({
     path: "/edit",
     query: { gearInfoProp: JSON.stringify(gearItemSelected.value) },
@@ -211,6 +229,7 @@ onMounted(async () => {
     id: doc.id,
     ...doc.data(),
   }));
+  console.log("Gear items loaded:", gearItems.value); // Debug log
 });
 // DELETE
 async function deleteItem() {

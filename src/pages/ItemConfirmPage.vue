@@ -39,12 +39,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { db } from 'src/firebase'; 
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { doc } from 'firebase/firestore';
 import GearTile from "../components/GearTile.vue"
 import { updateDoc } from 'firebase/firestore';
+
+import { useQuasar } from 'quasar';
+const $q = useQuasar()
 
 defineOptions({
     name: "ItemConfirmPage"
@@ -88,6 +91,9 @@ const showConfirmMessage = async () => {
         await updateDoc(gearDocRef, {
             status: props.statusUpdate,
             location: location.value
+        })
+        $q.notify({
+            
         })
         console.log('Document successfully updated')
     } catch (error) {

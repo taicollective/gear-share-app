@@ -7,6 +7,7 @@ import InventoryLayout from 'layouts/InventoryLayout.vue'
 import InventoryPage from 'pages/InventoryPage.vue'
 import AddGearItem from 'pages/AddGearItem.vue'
 import TradeAndDonateLayout from 'src/layouts/TradeAndDonateLayout.vue'
+import RentingLayout from "src/layouts/RentingLayout.vue";
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/trade-and-donate',
     component: TradeAndDonateLayout
+  },
+  {
+    path: '/renting',
+    component: RentingLayout
   },
   {
     path: "/partner-with-us",

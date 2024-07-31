@@ -93,7 +93,8 @@ const showConfirmMessage = async () => {
             location: location.value
         })
         $q.notify({
-            
+            color: "positive",
+            message: "Successful transaction!"
         })
         console.log('Document successfully updated')
     } catch (error) {

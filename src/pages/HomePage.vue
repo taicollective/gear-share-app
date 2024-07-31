@@ -18,9 +18,11 @@
             <h5 class="inter-bold">DONATE</h5>
           </button>
         </RouterLink>
-        <button class="btn-l">
-          <h5 class="inter-bold">RENTING</h5>
-        </button>
+        <RouterLink to="/renting" class="link">
+          <button class="btn-l">
+            <h5 class="inter-bold">RENTING</h5>
+          </button>
+        </RouterLink>
         <RouterLink to="/partner-with-us" class="link">
           <button class="btn-l">
             <h5 class="inter-bold">PARTNER WITH US</h5>
@@ -58,6 +60,7 @@ const user = computed(() => {
 h5 {
   font-size: 20px;
 }
+
 #layout-view {
   width: 100vw;
   height: 100vh;
@@ -69,16 +72,17 @@ h5 {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 2fr 2fr 2fr 1fr;
-  grid-gap: 5px;
+  grid-template-rows: 1fr 9fr;
   padding: calc(var(--padding) * 2);
 }
 
 .nav-buttons-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  /* grid-template-rows: repeat(1fr, 4); */
+  grid-template-rows: 2fr 2fr 2fr 1fr;
+  justify-items: center;
   align-items: center;
+  grid-gap: 5px;
   height: 100%;
 }
 
@@ -88,14 +92,6 @@ h5 {
   padding: 0;
   margin: 0;
   aspect-ratio: 0;
-}
-
-.btn-l {
-  padding: 30px 0px;
-  margin: 20px 0px;
-}
-
-.content:nth-child(1) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,6 +104,17 @@ h5 {
   background-color: var(--theme-8);
   border-radius: 50%;
   margin-bottom: var(--margin);
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 100%;
 }
 
 .large-text {

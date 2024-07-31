@@ -22,7 +22,7 @@ import { db } from '../firebase'
 import { collection, getDocs } from 'firebase/firestore'
 
 defineOptions({
-    name: "ItemSelectPage"
+    name: "SharedItemSelectPage"
 })
 
 const store = useStore()
@@ -41,7 +41,7 @@ onMounted(async () => {
   const querySnapshot = await getDocs(collection(db, 'gears'))
   gearItems.value = (querySnapshot.docs.map(doc => {
     const data = doc.data()
-    if (data.owner === store.getters.user.id) {
+    if (data.owner !== store.getters.user.id) {
         if (data.status !== 'renting' && data.status !== 'rented') {
             console.log(data.name, data.status)
             return data

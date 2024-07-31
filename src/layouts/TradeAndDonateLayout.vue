@@ -2,8 +2,9 @@
     <div id="layout-view">
         <BackgroundEl/>
         <ItemSelectPage @selectedGear="showOptions" v-if="selectingItem"/>
-        <TradeOrDonatePage @returnToSelect="showItems" @goToDonate="showDonatePage" :gearInfo="item" v-if="choosingOption"/>
+        <TradeOrDonatePage @returnToSelect="showItems" @goToDonate="showDonatePage" @goToTrade="showTradingPage" :gearInfo="item" v-if="choosingOption"/>
         <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Donate'" :gearInfo="item" :confirmMessage="donatingMsg" :statusUpdate="'donated'" v-if="donating"/>
+        
     </div>
 </template>
 

@@ -5,7 +5,7 @@
         </div>
         <div id="buttons-block" class="container--block">
             <GearTile :img="gearInfo.image" :size="'200px'"/>
-            <q-btn color="white" size="large" id="trade-btn" class="q-mb-md q-px-lg text-black" style="font-weight: 800">TRADE</q-btn>
+            <q-btn color="white" size="large" id="trade-btn" class="q-mb-md q-px-lg text-black" style="font-weight: 800" @click="goToTrade()">TRADE</q-btn>
             <q-btn color="white" size="large" id="donate-btn" class="q-mb-md q-px-lg text-black" style="font-weight: 800" @click="goToDonate()">DONATE</q-btn>
         </div>
         <div id="footer-block" class="container--block">
@@ -23,7 +23,7 @@ defineOptions({
 
 defineProps(['gearInfo', 'size'])
 
-const emit = defineEmits(['returnToSelect', 'goToDonate'])
+const emit = defineEmits(['returnToSelect', 'goToDonate', 'goToTrade'])
 
 const backToSelect = () => {
     emit('returnToSelect')
@@ -31,6 +31,10 @@ const backToSelect = () => {
 
 const goToDonate = () => {
     emit('goToDonate')
+}
+
+const goToTrade = () => {
+    emit('goToTrade')
 }
 
 </script>

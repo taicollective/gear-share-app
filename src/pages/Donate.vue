@@ -104,19 +104,12 @@ emailjs.init({ publicKey: "Qp7qCbWTQmfEyp8hq" });
 
 const sendEmail = () => {
   emailjs
-    .send(
-      secrets.serviceId,
-      secrets.templateId,
-      {
-        name: donateEmail.value.name,
-        email: donateEmail.value.email,
-        phone: donateEmail.value.phone,
-        message: donateEmail.value.message,
-      }
-      // {
-      //   publicKey: "Qp7qCbWTQmfEyp8hq",
-      // }
-    )
+    .send(secrets.serviceId, secrets.templateId, {
+      name: donateEmail.value.name,
+      email: donateEmail.value.email,
+      phone: donateEmail.value.phone,
+      message: donateEmail.value.message,
+    })
     .then(
       (response) => {
         console.log("SUCCESS!", response.status, response.text);

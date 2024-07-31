@@ -39,6 +39,7 @@
         size="lg"
         icon-right="paid"
         class="q-mx-lg q-py-lg q-mt-md"
+        @click="navigateToDonate('money')"
       >
         <p class="q-pr-md">DONATE MONEY</p>
       </q-btn>
@@ -47,6 +48,7 @@
         size="lg"
         icon-right="sports_basketball"
         class="q-mx-lg q-py-lg q-mt-md"
+        @click="navigateToDonate('gear')"
       >
         <p class="q-pr-md">DONATE GEAR</p>
       </q-btn>
@@ -66,7 +68,16 @@
 <script setup>
 import BackgroundEl from "../components/BackgroundEl.vue";
 
-import { RouterLink } from "vue-router";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const navigateToDonate = (type) => {
+  console.log("Navigating to donate");
+  router.push({
+    path: "/donate",
+    query: { type: type },
+  });
+};
 
 defineOptions({
   name: "PartnerWithUs",

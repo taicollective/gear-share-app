@@ -1,6 +1,7 @@
 import WelcomeLayout from "layouts/WelcomeLayout.vue";
 import HomePage from "pages/HomePage.vue";
 import PartnerWithUs from "pages/PartnerWithUs.vue";
+import Donate from "pages/Donate.vue";
 
 import InventoryLayout from "layouts/InventoryLayout.vue";
 import InventoryPage from "pages/InventoryPage.vue";
@@ -30,6 +31,11 @@ const routes = [
   {
     path: "/partner-with-us",
     component: PartnerWithUs,
+  },
+  {
+    path: "/donate",
+    component: Donate,
+    props: (route) => ({ type: route.query.type }),
   },
   {
     path: "/inventory",

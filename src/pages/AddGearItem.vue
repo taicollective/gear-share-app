@@ -65,6 +65,7 @@
       <q-input
         v-model.number="newGearItem.price"
         type="number"
+        prefix="$"
         bg-color="white"
         class="q-ma-md input-text"
       />

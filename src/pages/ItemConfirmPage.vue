@@ -53,13 +53,14 @@ defineOptions({
 const router = useRouter()
 
 const emit = defineEmits(['returnToSelect'])
-const props = defineProps(['titleMessage', 'gearInfo', 'confirmMessage'])
+const props = defineProps(['titleMessage', 'gearInfo', 'confirmMessage', 'statusUpdate'])
 
 const msg = ref(false)
 const location = ref('')
 const deliveryChoice = ref("drop-off")
 
 onMounted(() => {
+    console.log(props.gearInfo)
     if (props.gearInfo.location && props.gearInfo) {
         location.value = props.gearInfo.location
     }
@@ -80,11 +81,12 @@ const switchDeliveryChoice = (choice) => {
 const showConfirmMessage = async () => {
     msg.value = true
 
+    console.log(props.gearInfo.id)
     const gearDocRef = doc(db, 'gears', props.gearInfo.id)
 
     try {
         await updateDoc(gearDocRef, {
-            status: 'rented',
+            status: props.statusUpdate,
             location: location.value
         })
         console.log('Document successfully updated')

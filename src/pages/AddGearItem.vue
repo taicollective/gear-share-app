@@ -141,7 +141,7 @@ const newGearItem = ref({
   image: null,
   location: null,
   status: 'available',
-  owner: store.getters.user.id
+  owner: store.getters.user.id,
 })
 
 onMounted(async () => {
@@ -190,6 +190,7 @@ const saveNewItem = async () => {
   if (editMode.value) {
     try {
       // Get a reference to the document
+      
       const docRef = doc(db, "gears", newGearItem.value.id);
 
       // Update the document
@@ -223,7 +224,12 @@ const saveNewItem = async () => {
       const newItem = { ...newGearItem.value };
       console.log("new item to save: ", newItem);
       console.log("ref: ", collection(db, "gears"));
-      await addDoc(collection(db, "gears"), newItem);
+      const docRef = await addDoc(collection(db, "gears"), newItem);
+
+      await updateDoc(docRef, {
+        id: docRef.id
+      });
+
       $q.notify({
         color: "positive",
         message: "Item saved successfully!",

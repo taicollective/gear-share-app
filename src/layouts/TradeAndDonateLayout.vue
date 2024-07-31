@@ -3,7 +3,7 @@
         <BackgroundEl/>
         <ItemSelectPage @selectedGear="showOptions" v-if="selectingItem"/>
         <TradeOrDonatePage @returnToSelect="showItems" @goToDonate="showDonatePage" :gearInfo="item" v-if="choosingOption"/>
-        <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Donate'" :gearInfo="item" :confirmMessage="donatingMsg" v-if="donating"/>
+        <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Donate'" :gearInfo="item" :confirmMessage="donatingMsg" :statusUpdate="'donated'" v-if="donating"/>
     </div>
 </template>
 

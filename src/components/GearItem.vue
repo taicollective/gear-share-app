@@ -22,7 +22,7 @@
     <div id="gear-item--2" class="gear-item" v-if="itemStyle == '2'">
       <img class="gear-photo" :src="gearInfo.image" alt="" />
       <div class="gear-info">
-        <p><span class="label">NAME:</span> {{ gearInfo.name.uppercase() }}</p>
+        <p><span class="label">NAME:</span> {{ gearInfo.name.toUpperCase() }}</p>
         <p>
           CONDITION:
           <q-rating

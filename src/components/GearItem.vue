@@ -38,6 +38,7 @@ defineProps(['itemStyle', 'gearInfo'])
 const getPillColor = (status) => {
   switch (status) {
     case 'rented': return 'var(--theme-5)'
+    case 'donated': return 'var(--theme-5)'
     case 'renting': return 'var(--orange)'
     case 'available': return 'var(--green)'
     default: return 'available'
@@ -45,11 +46,13 @@ const getPillColor = (status) => {
 }
 
 const checkIfRented = (status) => {
-  if (status === 'rented') {
-    return 'gear-item rented'
-  } else {
-    return 'gear-item'
-  }
+    if (status === 'rented') {
+        return 'gear-item rented'
+    } else if (status === 'donated') {
+        return 'gear-item donated'
+    } else {
+        return 'gear-item'
+    }
 }
 
 </script>
@@ -125,6 +128,15 @@ p {
 }
 
 .gear-item.rented > .gear-photo {
+    background-color: var(--theme-7);
+    filter: blur(5px);
+}
+
+.gear-item.donated {
+    background-color: var(--theme-6);
+}
+
+.gear-item.donated > .gear-photo {
     background-color: var(--theme-7);
     filter: blur(5px);
 }

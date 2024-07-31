@@ -64,7 +64,9 @@ import { db, storage } from '../firebase'
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
+const store = useStore()
 const $q = useQuasar()
 
 const newGearItem = ref({
@@ -73,7 +75,8 @@ const newGearItem = ref({
   price: null,
   image: null,
   location: null,
-  status: 'available'
+  status: 'available',
+  owner: store.getters.user.id
 })
 
 const fileInput = ref(null)

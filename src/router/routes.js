@@ -4,8 +4,8 @@ import HomePage from 'pages/HomePage.vue'
 import InventoryLayout from 'layouts/InventoryLayout.vue'
 import InventoryPage from 'pages/InventoryPage.vue'
 import AddGearItem from 'pages/AddGearItem.vue'
-import ItemSelectLayout from 'src/layouts/ItemSelectLayout.vue'
-import ItemSelectPage from 'pages/ItemSelectPage.vue'
+import ItemConfirmPage from 'pages/ItemConfirmPage.vue'
+import TradeAndRentLayout from 'src/layouts/TradeAndDonateLayout.vue'
 
 const routes = [
   {
@@ -18,13 +18,7 @@ const routes = [
   },
   {
     path: '/trade-and-donate',
-    component: ItemSelectLayout,
-    children: [
-      {
-        path: '',
-        component: ItemSelectPage
-      }
-    ]
+    component: TradeAndRentLayout
   },
   {
     path: '/inventory',

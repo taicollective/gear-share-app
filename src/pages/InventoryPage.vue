@@ -10,7 +10,7 @@
     </q-header>
 
     <div class="gear-list">
-      <GearItem itemStyle="3" v-for="gear in gearItems" :key="gear.id" :gearInfo="gear"/>
+      <GearItem itemStyle="3" v-for="gear in gearItems" :key="gear.id" :gearInfo="gear" :v-if="gear.owner === store.getters.user.id"/>
     </div>
 
     <q-footer class="bg-transparent text-white">
@@ -28,13 +28,20 @@ import GearItem from '../components/GearItem.vue'
 import { onMounted, ref } from 'vue'
 import { db } from '../firebase'
 import { collection, getDocs } from 'firebase/firestore'
+import { useStore } from 'vuex'
 
+const store = useStore()
 const gearItems = ref([])
 
 onMounted(async () => {
   // get collection gears from firestore
   const querySnapshot = await getDocs(collection(db, 'gears'))
-  gearItems.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  gearItems.value = (querySnapshot.docs.map(doc => {
+    const data = doc.data()
+    return data.owner === store.getters.user.id ? data : null
+  }))
+  .filter(doc => doc !== null)
+  // gearItems.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 })
 
 </script>

@@ -65,13 +65,13 @@ h5 {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 2fr 2fr 2fr 2fr 1fr;
-  grid-gap: calc(var(--margin) * 2);
+  grid-gap: 5px;
   padding: calc(var(--padding) * 2);
 }
 
 .content {
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   padding: 0;
   margin: 0;
   aspect-ratio: 0;

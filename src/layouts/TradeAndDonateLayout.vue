@@ -16,7 +16,7 @@ import TradeOrDonatePage from 'src/pages/TradeOrDonatePage.vue';
 import ItemConfirmPage from 'src/pages/ItemConfirmPage.vue'
 
 defineOptions({
-    name: "ItemSelectLayout"
+    name: "TradeAndDonateLayout"
 })
 
 const selectingItem = ref(true)

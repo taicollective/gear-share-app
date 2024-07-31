@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="nz.taicollective.gearshareapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>GearShare App</name>
+    <description>A Quasar Project</description>
+    <author email="team@taicollective.nz" href="https://taicollective.nz">
+        Tai Collective Devs
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="about:*" />
+     <platform name="android">
+        <icon src="res/mipmap-mdpi/gear-share-logo.png" density="mdpi" />
+        <icon src="res/mipmap-hdpi/gear-share-logo.png" density="hdpi" />
+        <icon src="res/mipmap-xhdpi/gear-share-logo.png" density="xhdpi" />
+        <icon src="res/mipmap-xxhdpi/gear-share-logo.png" density="xxhdpi" />
+        <icon src="res/mipmap-xxxhdpi/gear-share-logo.png" density="xxxhdpi" />
+    </platform>
+</widget>

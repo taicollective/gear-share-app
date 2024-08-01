@@ -15,5 +15,15 @@
         <icon src="res/mipmap-xhdpi/gear-share-logo.png" density="xhdpi" />
         <icon src="res/mipmap-xxhdpi/gear-share-logo.png" density="xxhdpi" />
         <icon src="res/mipmap-xxxhdpi/gear-share-logo.png" density="xxxhdpi" />
+        <splash src="res/mipmap-mdpi/splash.png" density="mdpi" />
+        <splash src="res/mipmap-hdpi/splash.png" density="hdpi" />
+        <splash src="res/mipmap-xhdpi/splash.png" density="xhdpi" />
+        <splash src="res/mipmap-xxhdpi/splash.png" density="xxhdpi" />
+        <splash src="res/mipmap-xxxhdpi/splash.png" density="xxxhdpi" />
     </platform>
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
 </widget>

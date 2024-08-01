@@ -7,18 +7,18 @@
       <GearTile :img="gearInfo.image" :size="'200px'" />
       <q-btn
         color="white"
-        size="large"
         id="trade-btn"
-        class="q-mb-md q-pa-lg text-black"
+        size="x-large"
+        class="q-mb-md q-px-lg q-py-lg text-black q-mt-lg"
         style="font-weight: 800"
         @click="goToTrade()"
         >TRADE</q-btn
       >
       <q-btn
         color="white"
-        size="large"
         id="donate-btn"
-        class="q-mb-md q-pa-lg text-black"
+        size="x-large"
+        class="q-mb-md q-px-lg q-py-lg text-black"
         style="font-weight: 800"
         @click="goToDonate()"
         >DONATE</q-btn
@@ -27,7 +27,7 @@
     <div id="footer-block" class="container--block">
       <q-btn
         color="black"
-        size="large"
+        size="x-large"
         class="q-mb-md q-px-lg text-white"
         style="font-weight: 800"
         @click="backToSelect()"

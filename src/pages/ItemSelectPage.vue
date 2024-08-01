@@ -2,10 +2,13 @@
   <div id="container">
     <div id="header-block" class="container--block">
       <h3 class="title">CHOOSE AN ITEM</h3>
+      <p class="description q-mt-md">
+        Choose one of your gear items to Trade or Donate
+      </p>
     </div>
     <div id="items-block" class="container--block">
       <h6 id="subtitle" v-if="gearItems.length === 0">
-        Looks like you have nothing to donate, trade or rent.
+        {{ noneMessage }}
       </h6>
       <GearItem
         itemStyle="2"
@@ -20,12 +23,23 @@
       <q-btn
         to="/home"
         color="black"
-        size="large"
-        class="q-mb-md q-pb-md text-white"
+        size="x-large"
+        class="q-mb-md q-px-lg text-white"
         style="font-weight: 800"
         >BACK</q-btn
       >
     </div>
+
+    <!-- Add loadig spinner to parent -->
+    <q-inner-loading
+      :showing="loading"
+      size="xl"
+      color="orange"
+      label="Please wait..."
+      label-class="text-orange"
+      label-style="font-size: 3em; font-weight: 800"
+      :dark="true"
+    />
   </div>
 </template>
 
@@ -47,19 +61,24 @@ const emit = defineEmits(["selectedGear"]);
 const gearItems = ref([]);
 const selectedItem = ref();
 
+const loading = ref(false);
+const noneMessage = ref("");
+
 const selectItem = (gearItem) => {
   selectedItem.value = gearItem;
   emit("selectedGear", selectedItem.value);
 };
 
 onMounted(async () => {
+  loading.value = true;
   // get collection gears from firestore
-  const querySnapshot = await getDocs(collection(db, 'gears'))
-  gearItems.value = (querySnapshot.docs.map(doc => {
-    const data = doc.data()
-    if (data.owner === store.getters.user.id) {
-        if (data.status !== 'renting' && data.status !== 'rented') {
-            return data
+  const querySnapshot = await getDocs(collection(db, "gears"));
+  gearItems.value = querySnapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      if (data.owner === store.getters.user.id) {
+        if (data.status !== "renting" && data.status !== "rented") {
+          return data;
         } else {
           return null;
         }
@@ -68,7 +87,11 @@ onMounted(async () => {
       }
     })
     .filter((doc) => doc !== null);
-  //   gearItems.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  // if none
+  if (gearItems.value.length === 0) {
+    noneMessage.value = "Looks like you have nothing to donate, trade or rent.";
+  }
+  loading.value = false;
 });
 </script>
 
@@ -86,12 +109,19 @@ onMounted(async () => {
 }
 
 #header-block {
-  height: 10vh;
+  /* height: 15vh; */
 }
 
 #items-block {
-  height: 80vh;
+  /* height: 80vh; */
   overflow: scroll;
+}
+
+.description {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }
 
 #subtitle {
@@ -109,5 +139,7 @@ onMounted(async () => {
 
 #footer-block {
   height: 10vh;
+  position: fixed;
+  bottom: 10px;
 }
 </style>

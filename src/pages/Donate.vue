@@ -100,7 +100,7 @@ const donateEmail = ref({
     " to your mission.",
 });
 
-emailjs.init({ publicKey: "Qp7qCbWTQmfEyp8hq" });
+emailjs.init({ publicKey: secrets.emailJsPublicKey });
 
 const sendEmail = () => {
   emailjs

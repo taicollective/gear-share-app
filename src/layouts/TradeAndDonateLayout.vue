@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 import BackgroundEl from 'src/components/BackgroundEl.vue'
 import ItemSelectPage from 'src/pages/ItemSelectPage.vue';
@@ -20,18 +20,18 @@ import SharedItemSelectPage from 'src/pages/SharedItemSelectPage.vue';
 import TradeConfirmPage from 'src/pages/TradeConfirmPage.vue';
 
 defineOptions({
-    name: "TradeAndDonateLayout"
-})
+  name: "TradeAndDonateLayout",
+});
 
 const selectingItem = ref(true)
 const selectingTrade = ref(false)
 const choosingOption = ref(false)
 
-const trading = ref(false)
-const tradingMsg = ref("Your trade request has been sent!")
+const trading = ref(false);
+const tradingMsg = ref("Your trade request has been sent!");
 
-const donating = ref(false)
-const donatingMsg = ref("Thank you for your donation!")
+const donating = ref(false);
+const donatingMsg = ref("Thank you for your donation!");
 
 const item = ref()
 const itemToTrade = ref()
@@ -79,5 +79,4 @@ const showTrade = (gearItem) => {
 
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

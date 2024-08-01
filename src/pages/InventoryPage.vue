@@ -29,11 +29,11 @@
       </q-chip>
       <q-chip
         clickable
-        @click="filterByStatus('rented')"
+        @click="filterByStatus('donated')"
         size="sm"
         color="grey"
         text-color="white"
-        >RENTED</q-chip
+        >DONATED</q-chip
       >
       <q-chip
         clickable
@@ -147,8 +147,8 @@
 <script setup>
 import GearItem from "../components/GearItem.vue";
 
-import { useStore } from 'vuex'
-import { db } from '../firebase'
+import { useStore } from "vuex";
+import { db } from "../firebase";
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 import { onMounted, ref, computed } from "vue";
@@ -162,19 +162,20 @@ const chipFilters = ref([]);
 
 const router = useRouter();
 
-const store = useStore()
-const gearItems = ref([])
+const store = useStore();
+const gearItems = ref([]);
 
-onMounted(async () => {
-  // get collection gears from firestore
-  const querySnapshot = await getDocs(collection(db, 'gears'))
-  gearItems.value = (querySnapshot.docs.map(doc => {
-    const data = doc.data()
-    return data.owner === store.getters.user.id ? data : null
-  }))
-  .filter(doc => doc !== null)
-  // gearItems.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-})
+const fetchGearItems = async () => {
+  const querySnapshot = await getDocs(collection(db, "gears"));
+  gearItems.value = querySnapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return data.owner === store.getters.user.id ? data : null;
+    })
+    .filter((doc) => doc !== null);
+};
+
+onMounted(fetchGearItems);
 
 const filteredGearItems = computed(() => {
   if (!search.value) {
@@ -192,9 +193,9 @@ const filterByStatus = (status) => {
     chipFilters.value = gearItems.value.filter(
       (gear) => gear.status === "renting"
     );
-  } else if (status === "rented") {
+  } else if (status === "donated") {
     chipFilters.value = gearItems.value.filter(
-      (gear) => gear.status === "rented"
+      (gear) => gear.status === "donated"
     );
   } else if (status === "available") {
     chipFilters.value = gearItems.value.filter(
@@ -244,6 +245,8 @@ async function deleteItem() {
 
     // Delete the document
     await deleteDoc(docRef);
+
+    await fetchGearItems();
 
     filteredGearItems.value = filteredGearItems.value.filter(
       (item) => item.id !== gearItemSelected.value.id

@@ -79,11 +79,18 @@ h5 {
 .nav-buttons-wrapper {
   display: grid;
   /* grid-template-rows: repeat(1fr, 4); */
-  grid-template-rows: 2fr 2fr 2fr 1fr;
+  /* grid-template-rows: 2fr 2fr 2fr 1fr; */
   justify-items: center;
   align-items: center;
   grid-gap: 5px;
   height: 100%;
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .content {
@@ -104,17 +111,6 @@ h5 {
   background-color: var(--theme-8);
   border-radius: 50%;
   margin-bottom: var(--margin);
-}
-
-.link {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-button {
-  width: 100%;
 }
 
 .large-text {

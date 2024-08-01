@@ -43,7 +43,6 @@ onMounted(async () => {
     const data = doc.data()
     if (data.owner === store.getters.user.id) {
         if (data.status !== 'renting' && data.status !== 'rented') {
-            console.log(data.name, data.status)
             return data
         } else {
             return null

@@ -1,12 +1,12 @@
 <template>
     <BackgroundEl/>
-    <ItemSelectPage @selectedGear="showRentingPage" v-if="selectingItem"/>
-    <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Renting'" :gearInfo="item" :confirmMessage="rentingMsg" :statusUpdate="'renting'" v-if="rentingItem"/>
+    <RentingSelectPage @selectedGear="showRentingPage" v-if="selectingItem"/>
+    <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Renting'" :gearInfo="item" :confirmMessage="rentingMsg" :statusUpdate="'rented'" v-if="rentingItem"/>
 </template>
 
 <script setup>
 import BackgroundEl from 'src/components/BackgroundEl.vue';
-import ItemSelectPage from 'src/pages/ItemSelectPage.vue';
+import RentingSelectPage from 'src/pages/RentingSelectPage.vue';
 import ItemConfirmPage from 'src/pages/ItemConfirmPage.vue';
 
 import { ref } from 'vue';

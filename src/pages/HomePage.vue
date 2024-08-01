@@ -14,13 +14,13 @@
         <RouterLink to="/trade-and-donate" class="link">
           <button class="btn-l">
             <h5 class="inter-bold">TRADE</h5>
-            <p class="inter-bold">&</p>
-            <h5 class="inter-bold">DONATE</h5>
+            <p class="inter-bold">OR</p>
+            <h5 class="inter-bold">DONATE GEAR</h5>
           </button>
         </RouterLink>
         <RouterLink to="/renting" class="link">
           <button class="btn-l">
-            <h5 class="inter-bold">RENTING</h5>
+            <h5 class="inter-bold">RENT GEAR</h5>
           </button>
         </RouterLink>
         <RouterLink to="/partner-with-us" class="link">
@@ -30,7 +30,7 @@
         </RouterLink>
         <RouterLink to="/inventory" class="link">
           <button class="btn-l">
-            <h5 class="inter-bold">INVENTORY</h5>
+            <h5 class="inter-bold">YOUR INVENTORY</h5>
           </button>
         </RouterLink>
       </div>

@@ -37,7 +37,13 @@
           <q-img
             :src="newGearItem.image"
             spinner-color="white"
-            style="height: 200px; max-width: 200px; border-radius: 10px"
+            style="
+              height: 200px;
+              max-width: 200px;
+              border-radius: 10px;
+              background-color: grey;
+            "
+            :class="!newGearItem.image ? 'image-with-text' : ''"
           />
         </div>
       </div>
@@ -107,15 +113,19 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
-import { useQuasar } from 'quasar'
-import { useRouter } from 'vue-router'
-import { db, storage } from '../firebase'
+import { useStore } from "vuex";
+import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
+import { db, storage } from "../firebase";
 import { ref, onMounted, computed } from "vue";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
 
-const store = useStore()
+const store = useStore();
 const $q = useQuasar();
 
 // Define props
@@ -140,9 +150,9 @@ const newGearItem = ref({
   price: 0,
   image: null,
   location: null,
-  status: 'available',
+  status: "available",
   owner: store.getters.user.id,
-})
+});
 
 onMounted(async () => {
   if (gearInfo.value) {
@@ -190,7 +200,7 @@ const saveNewItem = async () => {
   if (editMode.value) {
     try {
       // Get a reference to the document
-      
+
       const docRef = doc(db, "gears", newGearItem.value.id);
 
       // Update the document
@@ -227,7 +237,7 @@ const saveNewItem = async () => {
       const docRef = await addDoc(collection(db, "gears"), newItem);
 
       await updateDoc(docRef, {
-        id: docRef.id
+        id: docRef.id,
       });
 
       $q.notify({
@@ -261,6 +271,18 @@ const saveNewItem = async () => {
 .input-text {
   font-size: x-large;
   font-weight: 600;
+}
+
+.image-with-text::after {
+  content: "Upload a photo";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 60%;
 }
 </style>
 

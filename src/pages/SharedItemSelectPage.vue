@@ -8,7 +8,7 @@
             <GearItem itemStyle="2" v-for="gear in gearItems" :gearInfo="gear" :key="gear.id" @click="selectItem(gear)"/>
         </div>
         <div id="footer-block" class="container--block">
-            <q-btn to="/home" color="black" size="large" class="q-mb-md q-px-lg text-white" style="font-weight: 800">BACK</q-btn>
+            <q-btn color="black" size="large" class="q-mb-md q-px-lg text-white" style="font-weight: 800" @click="backToSelect()">BACK</q-btn>
         </div>
     </div>
 </template>
@@ -26,7 +26,8 @@ defineOptions({
 })
 
 const store = useStore()
-const emit = defineEmits(['chosenTrade'])
+const prop = defineProps(['userItem'])
+const emit = defineEmits(['chosenTrade', 'returnToTradeOrDonate'])
 
 const gearItems = ref([])
 const selectedItem = ref()
@@ -54,6 +55,10 @@ onMounted(async () => {
     }))
     .filter(doc => doc !== null)
 })
+
+const backToSelect = () => {
+    emit("returnToTradeOrDonate", prop.userItem)
+}
 
 </script>
 

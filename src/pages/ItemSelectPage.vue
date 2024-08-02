@@ -55,10 +55,10 @@ const selectItem = (gearItem) => {
 onMounted(async () => {
   // get collection gears from firestore
   const querySnapshot = await getDocs(collection(db, 'gears'))
-  gearItems.value = (querySnapshot.docs.map(doc => {
+  gearItems.value = querySnapshot.docs.map(doc => {
     const data = doc.data()
     if (data.owner === store.getters.user.id) {
-        if (data.status !== 'renting' && data.status !== 'rented') {
+        if (data.status === 'available') {
             return data
         } else {
           return null;

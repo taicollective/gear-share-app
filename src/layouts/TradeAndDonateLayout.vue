@@ -4,8 +4,8 @@
         <ItemSelectPage @selectedGear="showOptions" v-if="selectingItem"/>
         <TradeOrDonatePage @returnToSelect="showItems" @goToDonate="showDonate" @goToTrade="showTradeOffers" :gearInfo="item" v-if="choosingOption"/>
         <ItemConfirmPage @returnToSelect="showItems" :titleMessage="'Donate'" :gearInfo="item" :confirmMessage="donatingMsg" :statusUpdate="'donated'" v-if="donating"/>
-        <SharedItemSelectPage @chosenTrade="showTrade" v-if="selectingTrade"/>
-        <TradeConfirmPage v-if="trading" :userItem="item" :tradeItem="itemToTrade" :confirmMessage="tradingMsg"/>
+        <SharedItemSelectPage @returnToTradeOrDonate="showOptions" :userItem="item" @chosenTrade="showTrade" v-if="selectingTrade"/>
+        <TradeConfirmPage @returnToSelect="showSharedItems" v-if="trading" :userItem="item" :tradeItem="itemToTrade"/>
     </div>
 </template>
 
@@ -27,8 +27,7 @@ const selectingItem = ref(true)
 const selectingTrade = ref(false)
 const choosingOption = ref(false)
 
-const trading = ref(false);
-const tradingMsg = ref("Your trade request has been sent!");
+const trading = ref(false)
 
 const donating = ref(false);
 const donatingMsg = ref("Thank you for your donation!");
@@ -55,6 +54,15 @@ const showItems = () => {
     selectingTrade.value = false
 }
 
+const showSharedItems = () => {
+    choosingOption.value = false
+    trading.value = false
+    donating.value = false
+    selectingItem.value = false
+    selectingTrade.value = true
+
+}
+
 const showDonate = () => {
     selectingItem.value = false
     choosingOption.value = false
@@ -73,8 +81,13 @@ const showTradeOffers = () => {
 
 const showTrade = (gearItem) => {
     console.log(`trading for ${gearItem.name}`)
-
+    
     itemToTrade.value = gearItem
+    selectingItem.value = false
+    choosingOption.value = false
+    donating.value = false
+    trading.value = true
+    selectingTrade.value = false
 }
 
 </script>

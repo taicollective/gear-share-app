@@ -28,6 +28,11 @@ const showRentingPage = (gearItem) => {
     rentingItem.value = true
 }
 
+const showItems = () => {
+    selectingItem.value = true
+    rentingItem.value = false
+}
+
 </script>
 
 <style scoped>

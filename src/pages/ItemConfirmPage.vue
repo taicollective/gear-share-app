@@ -84,14 +84,23 @@ const switchDeliveryChoice = (choice) => {
 const showConfirmMessage = async () => {
     msg.value = true
 
+    console.log(props.statusUpdate)
     console.log(props.gearInfo.id)
     const gearDocRef = doc(db, 'gears', props.gearInfo.id)
 
     try {
-        await updateDoc(gearDocRef, {
-            status: props.statusUpdate,
-            location: location.value
-        })
+        if (props.statusUpdate !== "donated") {
+            await updateDoc(gearDocRef, {
+                status: props.statusUpdate,
+                location: location.value
+            })
+        } else if (props.statusUpdate === "donated") {
+            await updateDoc(gearDocRef, {
+                status: props.statusUpdate,
+                location: "GearShare HQ",
+                owner: "wYRGJG6YcMbrxDRl98VOwE4hjAr2"
+            })
+        }
         $q.notify({
             color: "positive",
             message: "Successful transaction!"
